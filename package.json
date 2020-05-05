@@ -9,8 +9,10 @@
     "build": "babel src --out-dir=dist",
     "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/server.js",
     "serve": "cross-env NODE_ENV=production npm run build && node dist/server.js",
-    "db:seed": "cross-env NODE_ENV=development babel-node src/database/utils/seed.js",
-    "db:wipe": "cross-env NODE_ENV=development babel-node src/database/utils/wipe.js",
+    "db:seed": "cross-env NODE_ENV=development babel-node src/database/scripts/seed.js",
+    "db:wipe": "cross-env NODE_ENV=development babel-node src/database/scripts/wipe.js",
+    "db:migrate-up": "cross-env NODE_ENV=development babel-node src/database/scripts/migrate.js up",
+    "db:migrate-down": "cross-env NODE_ENV=development babel-node src/database/scripts/migrate.js down",
     "test": "jest",
     "test:update": "jest --updateSnapshot",
     "test:coverage": "jest --coverage",
@@ -19,12 +21,13 @@
   },
   "dependencies": {
     "apollo-datasource": "^0.6.4",
-    "apollo-server": "^2.12.0",
+    "apollo-server": "^2.13.0",
     "bcryptjs": "^2.4.3",
     "custom-env": "^2.0.1",
     "graphql": "^14.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.11"
+    "mongoose": "^5.9.12",
+    "umzug": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -34,7 +37,7 @@
     "babel-eslint": "^10.1.0",
     "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
-    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jest": "^23.9.0",
     "jest": "^25.5.4",
     "nodemon": "^2.0.3"
   }

@@ -23,6 +23,6 @@ const server = new ApolloServer({
     console.log(`🚀 Server ready at ${url}`);
   } catch (e) {
     database.disconnect();
-    console.error('Connection error:', e);
+    console.log(e);
   }
 })();

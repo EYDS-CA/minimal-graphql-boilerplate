@@ -47,18 +47,20 @@ npm run start
 > Note: To use these commands with Docker, run them like such: \
 > `docker-compose exec -it server npm run ...` (make sure the container is running).
 
-| Command               | Description                                                        |
-|-----------------------|--------------------------------------------------------------------|
-| npm run build         | Builds the application                                             |
-| npm run start         | Runs the application locally with hot reloading on port 5000       |
-| npm run serve         | Builds the application then runs the application on port 5000      |
-| npm run db:seed       | Seeds the database with dummy data                                 |
-| npm run db:wipe       | Purges all records from the database                               |
-| npm run test          | Runs all jest tests                                                |
-| npm run test:update   | Updates jest snapshot files                                        |
-| npm run test:coverage | Runs all jest tests and displays a coverage report in the console  |
-| npm run lint          | Identifies linting warnings/errors                                 |
-| npm run lint:fix      | Fixes linting errors                                               |
+| Command                 | Description                                                        |
+|-------------------------|--------------------------------------------------------------------|
+| npm run build           | Builds the application                                             |
+| npm run start           | Runs the application locally with hot reloading on port 5000       |
+| npm run serve           | Builds the application then runs the application on port 5000      |
+| npm run db:seed         | Seeds the database with dummy data                                 |
+| npm run db:wipe         | Purges all records from the database                               |
+| npm run db:migrate-up   | Updates the database to its latest state                           |
+| npm run db:migrate-down | Reverts the database to its last state                             |
+| npm run test            | Runs all jest tests                                                |
+| npm run test:update     | Updates jest snapshot files                                        |
+| npm run test:coverage   | Runs all jest tests and displays a coverage report in the console  |
+| npm run lint            | Identifies linting warnings/errors                                 |
+| npm run lint:fix        | Fixes linting errors                                               |
 
 ## Environment Variables
 
