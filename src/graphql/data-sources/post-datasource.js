@@ -1,6 +1,8 @@
 import { ForbiddenError } from 'apollo-server';
 import { DataSource } from 'apollo-datasource';
 
+import { Post } from '../../database/models';
+
 export default class PostAPI extends DataSource {
   constructor() {
     super();
@@ -11,28 +13,28 @@ export default class PostAPI extends DataSource {
   }
 
   async getPosts() {
-    return await this.context.models.Post.find();
+    return await Post.find();
   }
-  
+
   async getPostById(postId) {
-    return await this.context.models.Post.findById(postId);
+    return await Post.findById(postId);
   }
-  
+
   async createPost(message) {
-    const newPost = new this.context.models.Post({
+    const newPost = new Post({
       message,
       user: this.context.user.id,
     });
-  
+
     const res = await newPost.save();
     return {
       ...res._doc,
       id: res._id,
     };
   }
-  
+
   async deletePost(postId) {
-    const post = await this.context.models.Post.findById(postId);
+    const post = await Post.findById(postId);
     if (this.context.user.id === post.user.toString()) {
       await post.delete();
       return 'Post deleted successfully';

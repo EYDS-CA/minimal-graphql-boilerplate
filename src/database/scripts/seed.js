@@ -16,7 +16,7 @@ import { User, Post } from '../models';
     }).save();
 
     /** Create 10 dummy posts from that user */
-    await Post.insertMany([...Array(10)].map((item, i) => ({
+    await Post.insertMany([...Array(10)].map((_, i) => ({
       message: `Dummy post #${i + 1}`,
       user: user._id,
     })));
@@ -28,4 +28,4 @@ import { User, Post } from '../models';
     database.disconnect();
     process.exit();
   }
-})();
+})(0);
