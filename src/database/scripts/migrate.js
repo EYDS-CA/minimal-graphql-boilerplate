@@ -8,7 +8,6 @@ import database from '..';
   env(process.env.NODE_ENV, path.join(__dirname, '../../../'));
   try {
     const instance = await database.connect();
-    const migrationType = process.argv[2];
     const umzug = new Umzug({
       migrations: {
         path: path.join(__dirname, '../migrations'),
@@ -20,18 +19,20 @@ import database from '..';
       },
     });
 
+    const migrationType = process.argv[2];
+    const migrationVersion = process.argv[3];
     switch (migrationType) {
       case 'up':
-        await umzug.up({});
+        await umzug.up({ to: migrationVersion });
         break;
       case 'down':
-        await umzug.down({});
+        await umzug.down({ to: migrationVersion });
         break;
       default:
         throw new Error('Invalid migration type');
     }
 
-    console.log(`Migration ${migrationType} ran successfully!`);
+    console.log('Migrations ran successfully!');
   } catch (e) {
     console.log(e);
   } finally {

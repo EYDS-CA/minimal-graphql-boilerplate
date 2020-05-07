@@ -33,9 +33,8 @@ docker-compose up
 
 ##### **Without Docker**
 
-1. Download and run  [MongoDB](https://docs.mongodb.com/manual/installation/)
-
-2. Edit [.env.development](.env.development) and [.env.test](.env.test) to use the the non-docker `DATABASE_URL`
+1. Download and run [MongoDB](https://docs.mongodb.com/manual/installation/)
+2. Edit [.env.development](.env.development) and [.env.test](.env.test) to use the non-docker `DATABASE_URL`
 
 ```
 npm install
@@ -45,22 +44,35 @@ npm run start
 ## Commands
 
 > Note: To use these commands with Docker, run them like such: \
-> `docker-compose exec -it server npm run ...` (make sure the container is running).
+> `docker-compose exec server npm run ...` (make sure the container is running).
 
-| Command                 | Description                                                        |
-|-------------------------|--------------------------------------------------------------------|
-| npm run build           | Builds the application                                             |
-| npm run start           | Runs the application locally with hot reloading on port 5000       |
-| npm run serve           | Builds the application then runs the application on port 5000      |
-| npm run db:seed         | Seeds the database with dummy data                                 |
-| npm run db:wipe         | Purges all records from the database                               |
-| npm run db:migrate-up   | Updates the database to its latest state                           |
-| npm run db:migrate-down | Reverts the database to its last state                             |
-| npm run test            | Runs all jest tests                                                |
-| npm run test:update     | Updates jest snapshot files                                        |
-| npm run test:coverage   | Runs all jest tests and displays a coverage report in the console  |
-| npm run lint            | Identifies linting warnings/errors                                 |
-| npm run lint:fix        | Fixes linting errors                                               |
+| Command                           | Description                                                                      |
+|-----------------------------------|----------------------------------------------------------------------------------|
+| npm run build                     | Builds the application                                                           |
+| npm run start                     | Runs the application locally with hot reloading on port 5000                     |
+| npm run serve                     | Builds the application then runs the application on port 5000                    |
+| npm run db:seed                   | Seeds the database with dummy data                                               |
+| npm run db:wipe                   | Purges all records from the database                                             |
+| npm run db:migrate-up <version>   | Updates the database to the specified version (or latest version if unspecified) |
+| npm run db:migrate-down <version> | Reverts the database to the specified version (or last version if unspecified)   |
+| npm run test                      | Runs all jest tests                                                              |
+| npm run test:update               | Updates jest snapshot files                                                      |
+| npm run test:coverage             | Runs all jest tests and displays a coverage report in the console                |
+| npm run lint                      | Identifies linting warnings/errors                                               |
+| npm run lint:fix                  | Fixes linting errors                                                             |
+
+## Database Migrations
+
+Migrations are located in [src/database/migrations](src/database/migrations). To create a migration, use the following
+naming pattern: `[version]_[migration-name].js`. The file must export a default object with asynchronous `up` and 
+`down` methods. See the [example](src/database/migrations/00_initial.js) file.
+
+- To update the database, run: `npm run db:migrate-up <version>`
+- To rollback the database, run: `npm run db:migrate-down <version>`
+
+Where version is an optional param that must match the version number of a file. E.g. `npm run db:migrate-up 03` for 
+`03_foo-bar.js`. If you do not specify a version number, the database will be updated to the latest version for 
+migrating up and to the last version for migrating down.
 
 ## Environment Variables
 
@@ -71,5 +83,4 @@ you use a `.env.production` file (which is git ignored), or specify env vars on 
 `NODE_ENV`.
 
 ## License
-
 Code released under the [Apache License, Version 2.0](LICENSE).
