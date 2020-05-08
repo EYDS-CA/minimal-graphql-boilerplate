@@ -28,4 +28,4 @@ import { User, Post } from '../models';
     database.disconnect();
     process.exit();
   }
-})(0);
+})();
