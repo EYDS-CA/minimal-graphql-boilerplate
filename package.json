@@ -1,8 +1,7 @@
 {
-  "name": "portable-backend-boilerplate-graphql",
+  "name": "minimal-graphql-boilerplate",
   "version": "1.0.0",
   "description": "Boilerplate for creating GraphQL applications",
-  "author": "Jared Jewitt <jaredjewitt@gmail.com> (https://jared-jewitt.github.io/)",
   "license": "ISC",
   "keywords": [],
   "scripts": {
